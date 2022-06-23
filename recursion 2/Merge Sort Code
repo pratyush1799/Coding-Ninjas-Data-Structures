@@ -121,3 +121,67 @@ void mergeSort(int input[], int size){
 
 
 }
+
+
+// Another Method
+void Merge(int *part1, int *part2, int size1, int size2, int input[])
+{
+    int i,j,k;
+    i=j=k=0;
+    while(i<size1 && j<size2)
+    {
+        if(part1[i] < part2[j])
+        {
+            input[k] = part1[i];
+            i++;
+            k++;
+        }
+        else
+        {
+            input[k] = part2[j];
+            j++;
+            k++;
+        }
+    }
+    while(i<size1)
+    {
+        input[k] = part1[i];
+        i++;
+        k++;
+    }
+    while(j<size2)
+    {
+        input[k] = part2[j];
+        k++;
+        j++;
+    }
+}
+
+
+void mergeSort(int input[], int size){
+	// Write your code here
+    
+    if(size == 1)
+    {
+        return;
+    }
+    
+    int size1 = (size/2);
+    int size2 = (size - (size/2));
+    int *part1 = new int[size1];
+    int *part2 = new int[size2];
+    
+    for(int i=0;i<size1;i++)
+    {
+        part1[i] = input[i];
+    }
+    int k=0;
+    for(int i=size1;i<size;i++)
+    {
+        part2[k++] = input[i];
+    }
+    
+    mergeSort(part1,size1);
+    mergeSort(part2,size2);
+    Merge(part1,part2,size1,size2,input);
+}
