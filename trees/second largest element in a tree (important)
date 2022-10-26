@@ -97,3 +97,31 @@ TreeNode <int>* secondLargest(TreeNode<int> *root) {
     // Write your code here
 
 }
+
+
+// Very Simple approch. Just used the alsogrithm of finding the second largest element in an array. Created two Nodes M & N assigned INT_MIN value and then used recursion.
+
+#include<bits/stdc++.h>
+TreeNode<int>* M = new TreeNode<int>(INT_MIN);
+TreeNode<int>* N = new TreeNode<int>(INT_MIN);
+
+TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
+    // Write your code here
+
+    if(root->data > M -> data)
+    {
+        N = M;
+        M = root;
+    }
+    else if(root -> data > N -> data && root -> data < M -> data)
+    {
+        N = root;
+    }
+    
+    for(int i=0; i<root->children.size(); i++)
+    {
+        getSecondLargestNode(root -> children[i]);
+    }
+    
+    return N;
+}
